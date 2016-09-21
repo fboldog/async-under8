@@ -1,4 +1,5 @@
 import com.jfrog.bintray.gradle.BintrayExtension
+import org.gradle.api.JavaVersion
 import org.gradle.api.Project
 import org.gradle.api.artifacts.PublishArtifact
 import org.gradle.api.artifacts.dsl.ArtifactHandler
@@ -37,6 +38,9 @@ apply {
     plugin("maven-publish")
 }
 
+setProperty("targetCompatibility", JavaVersion.VERSION_1_7)
+setProperty("sourceCompatibility", JavaVersion.VERSION_1_7)
+
 repositories {
     kotlinEAP11()
     kotlinFutures()
@@ -51,7 +55,6 @@ dependencies {
     testCompile("junit:junit:4.12")
     testCompile("org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion")
 }
-
 
 if (!travisBuild) {
     val sourcesJar = task<Jar>("sourcesJar") {
@@ -95,6 +98,7 @@ if (!travisBuild) {
         }
     }
 }
+
 class property<T> : ReadOnlyProperty<Project, T> {
      override fun getValue(thisRef: Project, property: KProperty<*>): T {
         return uncheckedCast<T>(thisRef.properties[property.name])
