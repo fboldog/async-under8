@@ -31,3 +31,5 @@ fun main(args: Array<String>) {
     }
 }
 ```
+## Status
+[![Build Status](https://api.travis-ci.org/fboldog/async-under8.svg?branch=master)](https://travis-ci.org/fboldog/async-under8)
