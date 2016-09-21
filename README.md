@@ -5,6 +5,8 @@ Forked from [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines)
 
 This modification allows libraries to use *asnyc* and runs under most of Android devices.
 
+Thanks to [tikurahul](https://github.com/tikurahul/) - [kotlin-futures](https://github.com/tikurahul/kotlin-futures) implementation.
+
 ## Example
 ```kotlin
 import async_under8.async
