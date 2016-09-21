@@ -36,10 +36,16 @@ fun main(args: Array<String>) {
 
 ## Download
 
-[![Download](https://api.bintray.com/packages/fboldog/maven/async-under8/images/download.svg)](https://bintray.com/fboldog/maven/async-under8/_latestVersion) or depend via Gradle:
+[![Download](https://api.bintray.com/packages/fboldog/maven/async-under8/images/download.svg)](https://bintray.com/fboldog/maven/async-under8/_latestVersion) 
+
+or depend via Gradle:
 
 ```groovy
 compile 'com.fboldog.async_under8:async_under8:0.0.1'
+```
+or Gradle Kotlin Script:
+```kotlin
+compile("com.fboldog.async_under8:async_under8:0.0.1")
 ```
 
 or Maven:
