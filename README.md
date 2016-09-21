@@ -33,3 +33,20 @@ fun main(args: Array<String>) {
 ```
 ## Status
 [![Build Status](https://api.travis-ci.org/fboldog/async-under8.svg?branch=master)](https://travis-ci.org/fboldog/async-under8)
+
+## Download
+
+[![Download](https://api.bintray.com/packages/fboldog/maven/async-under8/images/download.svg)](https://bintray.com/fboldog/maven/async-under8/_latestVersion) or depend via Gradle:
+
+```groovy
+compile 'com.fboldog.async_under8:async_under8:0.0.1'
+```
+
+or Maven:
+```xml
+<dependency>
+  <groupId>com.fboldog.async_under8</groupId>
+  <artifactId>async_under8</artifactId>
+  <version>0.0.1</version>
+</dependency>
+```
