@@ -10,10 +10,13 @@ import kotlin.reflect.KProperty
 import kotlin.properties.ReadOnlyProperty
 import org.gradle.internal.Cast.uncheckedCast
 
+import java.lang.System
+
 val kotlinVersion by property<String>()
 val projectGroup by property<String>()
 val projectName by property<String>()
 val projectVersion by property<String>()
+val travisBuild = System.getenv("TRAVIS") == "true"
 
 buildscript {
     repositories {
@@ -50,47 +53,48 @@ dependencies {
 }
 
 
-val sourcesJar = task<Jar>("sourcesJar") {
-    dependsOn("classes")
+if (!travisBuild) {
+    val sourcesJar = task<Jar>("sourcesJar") {
+        dependsOn("classes")
 
-    from(sourceSets("main").allSource)
-    classifier = "sources"
-}
+        from(sourceSets("main").allSource)
+        classifier = "sources"
+    }
 
-configure<PublishingExtension>() {
-    publications {
-        create<MavenPublication>("JCenterPublication") {
-            from(components.getByName("java"))
-            artifact(sourcesJar)
+    configure<PublishingExtension>() {
+        publications {
+            create<MavenPublication>("JCenterPublication") {
+                from(components.getByName("java"))
+                artifact(sourcesJar)
 
-            groupId = projectGroup
-            artifactId = projectName
-            version = projectVersion
+                groupId = projectGroup
+                artifactId = projectName
+                version = projectVersion
+            }
         }
     }
-}
 
-configure<BintrayExtension> {
-    user = project.property("jcenter.personal.user").toString()
-    key = project.property("jcenter.personal.api_key").toString()
-    setPublications("JCenterPublication")
-    pkg.apply {
-        repo = "maven"
-        name = "async-under8"
-        desc = "Kotlin coroutine async without java 8 limitation"
-        websiteUrl = "https://github.com/fboldog/async-under8"
-        vcsUrl = "https://github.com/fboldog/async-under8"
-        publish = true
-        setLabels("kotlin")
-        setLicenses("Apache-2.0")
-        publicDownloadNumbers = true
-        version.apply {
-            name = projectVersion
+    configure<BintrayExtension> {
+        user = project.property("jcenter.personal.user").toString()
+        key = project.property("jcenter.personal.api_key").toString()
+        setPublications("JCenterPublication")
+        pkg.apply {
+            repo = "maven"
+            name = "async-under8"
             desc = "Kotlin coroutine async without java 8 limitation"
+            websiteUrl = "https://github.com/fboldog/async-under8"
+            vcsUrl = "https://github.com/fboldog/async-under8"
+            publish = true
+            setLabels("kotlin")
+            setLicenses("Apache-2.0")
+            publicDownloadNumbers = true
+            version.apply {
+                name = projectVersion
+                desc = "Kotlin coroutine async without java 8 limitation"
+            }
         }
     }
 }
-
 class property<T> : ReadOnlyProperty<Project, T> {
      override fun getValue(thisRef: Project, property: KProperty<*>): T {
         return uncheckedCast<T>(thisRef.properties[property.name])
