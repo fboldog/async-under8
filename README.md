@@ -9,20 +9,23 @@ This modification allows libraries to use *asnyc* and runs under most of Android
 ```kotlin
 import async_under8.async
 import com.rahulrav.futures.Future
-
+ 
 private fun startLongAsyncOperation(v: Int) =
         Future.submit {
             Thread.sleep(1000)
             "Result: $v"
         }
-
+        
 fun main(args: Array<String>) {
+    
     val future = async<String> {
         (1..5).map {
             await(startLongAsyncOperation(it))
         }.joinToString("\n")
     }
-
-    println(future.await(0))
+    
+    future.onSuccess {
+        println(it)
+    }
 }
 ```
