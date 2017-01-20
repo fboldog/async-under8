@@ -1,4 +1,9 @@
+## DEPRECATED
+update for 1.1 beta 17 on the way
+
 # async-under8
+ 
+
 Library built upon Kotlin coroutines.
 Forked from [kotlinx.coroutines](https://github.com/Kotlin/kotlinx.coroutines) 
 ([kotlinx-coroutines-async](https://github.com/Kotlin/kotlinx.coroutines/tree/master/kotlinx-coroutines-async)), but drops java 8 requirement.
